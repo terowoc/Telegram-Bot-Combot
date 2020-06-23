@@ -235,11 +235,10 @@ $obro = get("obro/$chat_id/$uid.obro");
 if($obro<0){
 put("obro/$chat_id/$ruid.obro","0");
 	}
-	$msgID = $bot->sendMessage([
+	$bot->sendMessage([
 'chat_id' => $chat_id, 
 'text' => "<a href = 'tg://user?id=$uid'>$ufname</a> sizning obroingiz soni: <b>$obro</b> ta", 
 'parse_mode' => "html",
-'disable_notification'=>true,
 ]);
 }
 if ($text == "!msg"){
