@@ -86,7 +86,7 @@ $bot->sendMessage([
 'parse_mode' => "markdown"
 ]);
 }
-
+}
 
 if(isset($text)){
   if($type == "group" or $type == "supergroup"){
@@ -100,7 +100,6 @@ if(isset($text)){
     put("stat/user.list","$userlar\n$chat_id");
    }
   }
- }
 }
 if($data == "hisobot"){
 $gr = substr_count($guruhlar,"\n"); 
