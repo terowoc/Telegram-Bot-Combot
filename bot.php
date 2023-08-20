@@ -8,63 +8,59 @@
  * @date 08:14 23-iyun. 2020 yil.
  */
 
-##########
 require __DIR__."/TelegramBot.php";
 $config = require __DIR__."/_config.php";
-###########
 $bot = new TelegramBot($config['bot_token']);
 $update = $bot->getData();
-###########
+
 function get($name){
 	$get = file_get_contents($name);
 	return $get;
-	}
-	function put($name, $nima){
-		file_put_contents($name, $nima);
-	}
-###########
+}
+
+function put($name, $nima){
+	file_put_contents($name, $nima);
+}
+
 $text = $update['message']['text'];
 $mesid = $update['message']['message_id'];
 $chat_id = $update['message']['chat']['id'];
 $type = $update['message']['chat']['type'];
-###########
 $ruid = $update['message']['reply_to_message']['from']['id'];
 $rname= $update['message']['reply_to_message']['from']['first_name'];
 $rmid= $update['message']['reply_to_message']['from']['message_id'];
 $rlogin = $update['message']['reply_to_message']['from']['username'];
-###########
 $ufname = str_replace(["[","]","(",")","*","_","`"],["","","","","","",""],$update['message']['from']['first_name']);
 $uname = $update['message']['from']['last_name'];
 $ulogin = $update['message']['from']['username'];
 $uid = $update['message']['from']['id'];
-###########
 $cqid = $update['callback_query'];
 $id = $update['callback_query']['id'];
 $mid2 = $update['callback_query']['message']['message_id'];
 $uid2 = $update['callback_query']['from']['id'];
 $cid2 = $update['callback_query']['message']['chat']['id'];
 $data = $update['callback_query']['data'];
-###########
+
 mkdir("stat");
 mkdir("obro/$chat_id");
 $guruhlar = get("stat/group.list");
 $userlar = get("stat/user.list");
-###########
-if(get("obro/$chat_id/$uid.obro")){
-}else{    
-put("obro/$chat_id/$uid.obro","0");
+
+if(!get("obro/$chat_id/$uid.obro")){    
+	put("obro/$chat_id/$uid.obro","0");
 }
-###########ComBot###########
+
 if($text=="/start"){
 	if($type=="private"){
-	$bot->sendMessage([
-'chat_id' => $chat_id, 
-'text' => "Salom *$ufname*!", 
-'parse_mode' => "markdown"
-]);
-$bot->sendMessage([
-'chat_id' => $chat_id, 
-'text' => "👾 *Combot* — bu telegramda sizning guruhingizdagi foydalanuvchilarning obrolarini hisoblovchi bot hisoblanadi!
+			$bot->sendMessage([
+				'chat_id' => $chat_id, 
+				'text' => "Salom *$ufname*!", 
+				'parse_mode' => "markdown"
+			]);
+
+			$bot->sendMessage([
+				'chat_id' => $chat_id, 
+				'text' => "👾 *Combot* — bu telegramda sizning guruhingizdagi foydalanuvchilarning obrolarini hisoblovchi bot hisoblanadi!
 
 💠 1. Botni guruhingizga qoshing!
 
